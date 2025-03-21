@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PG19 Radio Frequency 50MHz LC Generator - Repair & Teardown</title>
+  <meta name='description' content='Filip Cichowski - IoT, RF Engineering, Embedded Systems, PCB Design, Software Development, Ham Radio, and more.'>
+
+  <link rel="canonical" href="http://localhost:6060/blog/pg19-generator-teardown">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PG19 Radio Frequency 50MHz LC Generator - Repair & Teardown – Filip Cichowski">
+  <meta name="twitter:description" content="
+">
+  <meta name="twitter:image:src" content="http://localhost:6060/images/posts_images/2023-10-13/IMG_20230929_085325.jpg">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="PG19 Radio Frequency 50MHz LC Generator - Repair & Teardown – Filip Cichowski">
+  <meta property="og:description" content="
+">
+  <meta property="og:image" content="http://localhost:6060/images/posts_images/2023-10-13/IMG_20230929_085325.jpg">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/about/" class="nav__link">About</a>
+                </li>
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
+<!--bookshop-live name(social-link.jekyll.html) params() context() -->
+
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/FilipCichowski" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.linkedin.com/in/filip-cichowski" target="_blank" rel="noopener" aria-label="linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.youtube.com/@FilipSP9GMD" target="_blank" rel="noopener" aria-label="youtube icon"><i class="ion ion-logo-youtube"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+<!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts_images/2023-10-13/IMG_20230929_085325.jpg" alt="PG19 Radio Frequency 50MHz LC Generator - Repair & Teardown">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/generator" class="post-tags__tag">generator</a>
+            
+              <a href="/tag/meratronik" class="post-tags__tag">meratronik</a>
+            
+              <a href="/tag/analog" class="post-tags__tag">analog</a>
+            
+              <a href="/tag/radio" class="post-tags__tag">radio</a>
+            
+          </div>
+          
+
+
+          <h1 class="post__title">PG19 Radio Frequency 50MHz LC Generator - Repair &amp; Teardown</h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/filip_cichowski.jpg" alt="Filip Cichowski">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Filip Cichowski</div>
+              <time class="post__date" datetime="2023-10-13T15:53:33+02:00">13 Oct 2023</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p><img src="/images/posts_images/2023-10-13/IMG_20230929_085325.jpg" alt="Photo of working generator" /></p>
+
+<p>Recently I had the opportunity to repair an early 70s Polish radio frequency generator - PG19. It utilizes a traditional LC oscillator with optional AM modulation from external input or an internal RC generator. Before my repair, there was some signal on the output, but I wasn’t able to change the frequency.</p>
+
+<h2 id="teardown">Teardown</h2>
+
+<p>The device is very heavy compared to modern DDS equipment. You can access the interior very easily - you just have to remove the top cover and you can see the main parts.</p>
+
+<p><img src="/images/posts_images/2023-10-13/IMG_20230929_085339.jpg" alt="Top cover" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_134645.jpg" alt="Top cover removed" /></p>
+
+<p>In the top left corner, you can find the PSU board. Next to the right, under the black cover, there’s the main LC generator. Let’s go down. Those metal boxes hide adjustable attenuators which allows you to set signal level between 1uV and 3.16V. On the left PCB, there’s an audio frequency RC generator which can be used as an AM modulation source.</p>
+
+<h2 id="power-supply">Power supply</h2>
+
+<p>The power supply is based on a classical circuit utilizing a Zener diode as a reference and two bipolar transistors as the follower. It utilizes 2N3055 as a power transistor. A very popular choice for linear PSU in the 70s.</p>
+
+<p><img src="/images/posts_images/2023-10-13/IMG_20230928_095210.jpg" alt="PSU" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_123113.jpg" alt="PSU" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_123222.jpg" alt="PSU" /></p>
+
+<h2 id="rc-generator">RC Generator</h2>
+
+<p>RC generator built with BJT utilizes a phase shifter. It provides an AF modulation signal of 400Hz, 1kHz, or 4kHz frequency.</p>
+
+<p><img src="/images/posts_images/2023-10-13/IMG_20230928_134645(copy).jpg" alt="RC Generator" /></p>
+
+<h2 id="rf-lc-generator">RF LC Generator</h2>
+
+<p>PG-19 has 10 ranges and the LC circuit selection mechanism reflects that fact. The principle of operation of the range selection mechanism is simple: the user rotates the drum via a gear, and the contact plates contact the silver-plated pins at the appropriate moment. An auxiliary mechanism ensures the desired contact quality.</p>
+
+<p><img src="/images/posts_images/2023-10-13/IMG_20230928_122310.jpg" alt="LC Generator" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_122337.jpg" alt="LC Generator" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_122401.jpg" alt="LC Generator" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_122743.jpg" alt="Variable capacitor" />
+<img src="/images/posts_images/2023-10-13/IMG_20230928_122738.jpg" alt="Variable capacitor" /></p>
+
+<p>You can see that the black cover has some screws on top of it. After removing those caps you can access the coils and calibrate your generator. It’s a very smart mechanism that makes tunning way easier but still keeps the generator protected from dust.</p>
+
+<p><img src="/images/posts_images/2023-10-13/IMG_20230928_123204.jpg" alt="Black cover" /></p>
+
+<h1 id="repair">Repair</h1>
+
+<p>The problem mentioned at the beginning had a very simple solution. Some mechanical parts were made not of metal, but of texolite. The most problematic turned out to be: the scale cable drive wheel and the sleeve coupling the range switch with the knob. After tightening the screws, the problem disappeared. In addition, the usual problem was cracking potentiometers and switches that needed to be cleaned. At the very end, I carried out measurements which showed that the generator was working properly. There is no problem with modulation and attenuators.</p>
+
+<p><img src="/images/posts_images/2023-10-13/IMG_20230928_122300.jpg" alt="Disassembled generator" /></p>
+
+<h1 id="summary">Summary</h1>
+
+<p>Nowadays, this generator is more of a technical curiosity than a fully functional measuring device. Determining the exact frequency is very difficult, and the stability leaves much to be desired. However, it is worth restoring it to full working order because it is really solidly made and its appearance is pleasing to the eye.</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=PG19%20Radio%20Frequency%2050MHz%20LC%20Generator%20-%20Repair%20&%20Teardown&url=http://localhost:6060/blog/pg19-generator-teardown"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:6060/blog/pg19-generator-teardown"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=http://localhost:6060/blog/pg19-generator-teardown&amp;media=http://localhost:6060/images/posts_images/2023-10-13/IMG_20230929_085325.jpg&amp;description=PG19%20Radio%20Frequency%2050MHz%20LC%20Generator%20-%20Repair%20&%20Teardown"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:6060/blog/pg19-generator-teardown&title=PG19%20Radio%20Frequency%2050MHz%20LC%20Generator%20-%20Repair%20&%20Teardown&summary=&source=Vonge"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/battery-xt60-shield">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts_images/2023-09-18/accu_top.jpg" alt="PG19 Radio Frequency 50MHz LC Generator - Repair & Teardown">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">XT60 Shield For Enerblock LiFePo4 100Ah Battery</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/grn3-generator-teardown">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">USSR Generator GRN-3 250kHz - Repair & Teardown</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts_images/2023-10-14/IMG_20231005_091619.jpg" alt="PG19 Radio Frequency 50MHz LC Generator - Repair & Teardown">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#generator" class="section__link related-tag">See all<span> generator</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/grn3-generator-teardown">
+                      <img loading="lazy" src="/images/posts_images/2023-10-14/IMG_20231005_091619.jpg" alt="USSR Generator GRN-3 250kHz - Repair & Teardown">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/generator" class="article__tag">generator</a>
+                      
+                      <a href="/tag/analog" class="article__tag">analog</a>
+                      
+                      <a href="/tag/radio" class="article__tag">radio</a>
+                      
+                      <a href="/tag/ussr" class="article__tag">ussr</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/grn3-generator-teardown">USSR Generator GRN-3 250kHz - Repair & Teardown</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      ![Photo of working generator](/images/posts_images/2023-10-14/IMG_20231005_091619.jpg)
+
+## Background
+
+Soviet electro...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/filip_cichowski.jpg" alt="Filip Cichowski">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Filip Cichowski</div>
+                        <span class="article__date"><time datetime="2023-10-15T04:13:33+02:00">15 Oct 2023</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+    <!--
+        Bookshop components are accessed using the bookshop tag,
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
+<!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+
+<!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
+<!--bookshop-live name(social-link.jekyll.html) params() context() -->
+
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/FilipCichowski" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.linkedin.com/in/filip-cichowski" target="_blank" rel="noopener" aria-label="linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.youtube.com/@FilipSP9GMD" target="_blank" rel="noopener" aria-label="youtube icon"><i class="ion ion-logo-youtube"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+<!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Building ILER-40 v3</title>
+  <meta name='description' content='Filip Cichowski - IoT, RF Engineering, Embedded Systems, PCB Design, Software Development, Ham Radio, and more.'>
+
+  <link rel="canonical" href="http://localhost:6060/blog/building-iler40-v3-transceiver-part-1">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building ILER-40 v3 – Filip Cichowski">
+  <meta name="twitter:description" content="I can’t recall any serious problems while recreating shortwave receivers, but I have never managed to add a transceiver and thus build proper ham radio gear.
+So I decided to start from a kit with technical support, well done, detailed manual, and simple architecture. I chose ILER-40 v3 by EA3GCY. Since the beginning I have been thinking about possible development, and here’s the reason why I bought a bare motherboard without recommended enclosure and AGC kit.
+">
+  <meta name="twitter:image:src" content="http://localhost:6060/images/posts_images/2023-08-15/iler.jpeg">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="Building ILER-40 v3 – Filip Cichowski">
+  <meta property="og:description" content="I can’t recall any serious problems while recreating shortwave receivers, but I have never managed to add a transceiver and thus build proper ham radio gear.
+So I decided to start from a kit with technical support, well done, detailed manual, and simple architecture. I chose ILER-40 v3 by EA3GCY. Since the beginning I have been thinking about possible development, and here’s the reason why I bought a bare motherboard without recommended enclosure and AGC kit.
+">
+  <meta property="og:image" content="http://localhost:6060/images/posts_images/2023-08-15/iler.jpeg">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/about/" class="nav__link">About</a>
+                </li>
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
+<!--bookshop-live name(social-link.jekyll.html) params() context() -->
+
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/FilipCichowski" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.linkedin.com/in/filip-cichowski" target="_blank" rel="noopener" aria-label="linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.youtube.com/@FilipSP9GMD" target="_blank" rel="noopener" aria-label="youtube icon"><i class="ion ion-logo-youtube"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+<!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts_images/2023-08-15/iler.jpeg" alt="Building ILER-40 v3">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/iler-40" class="post-tags__tag">iler-40</a>
+            
+              <a href="/tag/diy" class="post-tags__tag">diy</a>
+            
+              <a href="/tag/troubleshooting" class="post-tags__tag">troubleshooting</a>
+            
+          </div>
+          
+
+
+          <h1 class="post__title">Building ILER-40 v3</h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/filip_cichowski.jpg" alt="Filip Cichowski">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Filip Cichowski</div>
+              <time class="post__date" datetime="2023-08-15T10:10:33+02:00">15 Aug 2023</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p>I can’t recall any serious problems while recreating shortwave receivers, but I have never managed to add a transceiver and thus build proper ham radio gear.
+So I decided to start from a kit with technical support, well done, detailed manual, and simple architecture. I chose <a href="https://www.qrphamradiokits.com/qrp-transceiver-kits/iler-40-20-v3-ssb-one-band/">ILER-40 v3</a> by EA3GCY. Since the beginning I have been thinking about possible development, and here’s the reason why I bought a bare motherboard without recommended enclosure and AGC kit.</p>
+
+<h2 id="package-finally-arrived">Package finally arrived!</h2>
+
+<p>I had to wait about 10 days for the package to be delivered. Do you want to see what I received?
+Parts are grouped into a few categories and every string bag corresponds to each category. The PCB was made using thick laminate.
+At this moment I realized that I received two linear potentiometers: one 50Kohm, and the second 10Kohm. The linear potentiometer is the wrong choice for an audio amplifier, but it can be replaced later.</p>
+
+<p><img src="/images/posts_images/2023-08-15/iler_unpacked.jpeg" alt="Unpacked kit" /></p>
+
+<p>Javier’s accuracy deserves praise, I received an exact number of components, and that helped me find swapped elements.
+The assembly manual basically leads you by hand, but I recommend tunning LC filters using VNA instead of tunning them for max volume or max output power.</p>
+
+<h2 id="first-test">First test</h2>
+
+<p>Ok, here the fun begins. After finishing soldering all parts, and tunning filters with NanoVNA I decided to connect the power. I was surprised because I haven’t heard anything from the headphones. Touching LM386’s inputs with a screwdriver haven’t changed anything so I decided to check the traces on the board and I realized that without soldering the external speaker/headphones switch I need to add a small jumper. You can see it in the foto below.</p>
+
+<p><img src="/images/posts_images/2023-08-15/jumper.jpeg" alt="Jumper" /></p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>Do you know what’s more interesting? After fixing this small error I heard a noise in the headphones, but the radio didn’t respond to connecting an antenna. I took a screwdriver and I began touching different parts of the circuit with it.
+The AF amplifier was working perfectly, AF filter too. By touching the input of a second mixer I was able to hear Radio Romania, and the radio responded with a small crack sound for touching the first mixer input.
+It suggested some problems with the input filter. So I took an ohmmeter and I started measuring TOKO-like canned coils and…. bingo! They had broken windings.</p>
+
+<p><img src="/images/posts_images/2023-08-15/iler_filter.jpeg" alt="Opened can filter" /></p>
+
+<h2 id="the-solution">The solution</h2>
+
+<p>I wouldn’t wish desoldering those filters to my worst enemy. After a long fight, I had to open cans to fix a winding. I did that by simply prying a metal can with a small knife.
+The damage could be seen easily. After short consideration I decided that there was no point in rewinding broken coils, then I fixed them with small pieces of wire as you can see below.
+After resoldering filters, I could hear noise increasing when connecting an antenna and I was able to pick a few CW stations. Great! It was a good moment to add a digital frequency readout.</p>
+
+<h2 id="frequency-counter">Frequency counter</h2>
+
+<p>I remembered I had a Chinese frequency counter in my junk box. I was right, I had to replace the broken tact switch with some from the broken VCR and it worked like a charm. I programmed IF frequency subtraction and since this moment I didn’t have to calculate ILER’s frequency.</p>
+
+<p><img src="/images/posts_images/2023-08-15/readout_top.jpeg" alt="Readout top" />
+<img src="/images/posts_images/2023-08-15/readout_bottom.jpeg" alt="Readout bottom" /></p>
+
+<h2 id="vxo-fix">VXO fix</h2>
+
+<p>I had to set the VXO frequency range with the coil and I would be done. It turned out very quickly that compressing and decompressing turns constantly is only for the faint-hearted. So I replaced the Amidon core coil with a random IF filter from some old radiotelephone which had about 17uH (adjustable) and I soldered shielding to the crystal enclosure, then I grounded the whole part.
+It eliminated the effect of bringing your hand closer to the radio. With the original coil, it detunes about 2KHz when you approach the motherboard with your hand.</p>
+
+<p><img src="/images/posts_images/2023-08-15/vxo.jpeg" alt="VXO" /></p>
+
+<h2 id="agc-board">AGC board</h2>
+
+<p>It was enough that Sasha from Moscow called a friend with a power of 5kW, and I almost went deaf. So I decided to design the AGC board based on the <a href="http://www.radiomanual.info/schemi/Vari/ILER-40_CAG_user.pdf">original schematic</a> but with SMD parts only.</p>
+
+<p><img src="/images/posts_images/2023-08-15/agc_design_bottom.jpg" alt="AGC design bottom" />
+<img src="/images/posts_images/2023-08-15/agc_design_top.jpg" alt="AGC design top" /></p>
+
+<p>I made the mistake of not using the hand solder footprint for the transistors but somehow managed to solder it. I will share the PCB design together with the documentation of the completed radio.
+Keep in mind that you have to remove C28 and R14 instead of R17 and C31 while installing it in V3 version. It seems like AGC was designed for older ILER review.
+The circuit works well, but in my opinion, the output level is not enough, I will try to adjust the values of the elements to get the desired volume. In addition, I changed the value of the electrolytic capacitor responsible for the AGC time constant to a lower value, because the original was too slow.</p>
+
+<h2 id="its-housing-time">It’s housing time!</h2>
+
+<p>With the radio running, I decided to design a housing for it. The project was created in Autodesk Inventor. I will share the .ipt files after checking everything fits together. The housing consists of several pieces of sheet metal that are easy to cut with a laser and two sections of a 10x10mm structural profile. The structure will be powered by the XT-60 connector. In the housing, I have provided space for a 30W power amplifier for 2xIRF530 and a low-pass filter.</p>
+
+<p><img src="/images/posts_images/2023-08-15/cad_top.jpg" alt="Housing top" />
+<img src="/images/posts_images/2023-08-15/cad_back.jpg" alt="Housing bottom" />
+<img src="/images/posts_images/2023-08-15/cad_finished.jpg" alt="Housing finished" /></p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Trasceiver works as expected, It has 6W SSB output power. I will measure the sensitivity soon.
+That’s it for now, I’m waiting for laser-cut elements, and in the next article, I will describe the further history of the construction - the activation of the Chinese PA 30W and tuning the low-pass filter.</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=Building%20ILER-40%20v3&url=http://localhost:6060/blog/building-iler40-v3-transceiver-part-1"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:6060/blog/building-iler40-v3-transceiver-part-1"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=http://localhost:6060/blog/building-iler40-v3-transceiver-part-1&amp;media=http://localhost:6060/images/posts_images/2023-08-15/iler.jpeg&amp;description=Building%20ILER-40%20v3"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:6060/blog/building-iler40-v3-transceiver-part-1&title=Building%20ILER-40%20v3&summary=&source=Vonge"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/2m-j-pole-from-measurement-tape">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts_images/2023-05-30/antenna_hero.jpeg" alt="Building ILER-40 v3">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">2m J  Pole From Measurement Tape - new SOTA/POTA must-have?</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/programming-cable-yaesu-vx7r">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">Programming Cable For Yaesu VX-7R</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts_images/2023-09-01/starting_cable.jpg" alt="Building ILER-40 v3">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#iler-40" class="section__link related-tag">See all<span> iler-40</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/battery-xt60-shield">
+                      <img loading="lazy" src="/images/posts_images/2023-09-18/accu_top.jpg" alt="XT60 Shield For Enerblock LiFePo4 100Ah Battery">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/lifepo4" class="article__tag">lifepo4</a>
+                      
+                      <a href="/tag/diy" class="article__tag">diy</a>
+                      
+                      <a href="/tag/battery" class="article__tag">battery</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/battery-xt60-shield">XT60 Shield For Enerblock LiFePo4 100Ah Battery</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      ![Finished enclosure](/images/posts_images/2023-09-18/accu_top.jpg)
+
+I designed this shield for [LiFePo4 battery](htt...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/filip_cichowski.jpg" alt="Filip Cichowski">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Filip Cichowski</div>
+                        <span class="article__date"><time datetime="2023-09-18T17:43:33+02:00">18 Sep 2023</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/programming-cable-yaesu-vx7r">
+                      <img loading="lazy" src="/images/posts_images/2023-09-01/starting_cable.jpg" alt="Programming Cable For Yaesu VX-7R">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/diy" class="article__tag">diy</a>
+                      
+                      <a href="/tag/yaesu" class="article__tag">yaesu</a>
+                      
+                      <a href="/tag/4m" class="article__tag">4m</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/programming-cable-yaesu-vx7r">Programming Cable For Yaesu VX-7R</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      I received a VX-7R radiotelephone from Maciej SQ9NJL for checking its functionality and unlocking the 4m band. After ...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/filip_cichowski.jpg" alt="Filip Cichowski">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Filip Cichowski</div>
+                        <span class="article__date"><time datetime="2023-09-01T18:29:34+02:00">01 Sep 2023</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+    <!--
+        Bookshop components are accessed using the bookshop tag,
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
+<!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+
+<!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
+<!--bookshop-live name(social-link.jekyll.html) params() context() -->
+
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/FilipCichowski" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.linkedin.com/in/filip-cichowski" target="_blank" rel="noopener" aria-label="linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://www.youtube.com/@FilipSP9GMD" target="_blank" rel="noopener" aria-label="youtube icon"><i class="ion ion-logo-youtube"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+<!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>
