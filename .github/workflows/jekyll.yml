@@ -51,7 +51,7 @@ jobs:
           [ -d "site/_site" ] || { echo "ERROR: _site not generated"; exit 1; }
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "site/_site"
 
