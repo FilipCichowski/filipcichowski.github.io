@@ -1,27 +1,20 @@
-name: Deploy my site
+name: Deploy Jekyll site to Pages
 
 on:
-
   push:
     branches: ["main"]
-
-
   workflow_dispatch:
-
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-
-
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -29,35 +22,34 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Ruby
-
-        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
+        uses: ruby/setup-ruby@v1  # Użyj oficjalnej wersji zamiast commit hash
         with:
-          ruby-version: '3.1' # Możesz użyć pliku .ruby-version zamiast tego
-          bundler-cache: true # Automatycznie instaluje i cache'uje gemy
-          cache-version: 0 # Zwiększ tę wartość, jeśli potrzebujesz wymusić ponowne pobranie gemów
+          ruby-version: '3.1'
+          bundler-cache: true
+          cache-version: 0
 
       - name: Install dependencies
         run: bundle install
-        working-directory: ./site # Przejdź do folderu `site`
-
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
+        working-directory: ./site
 
       - name: Build with Jekyll
-
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
-        working-directory: ./site # Przejdź do folderu `site`
+        working-directory: ./site
         env:
           JEKYLL_ENV: production
 
       - name: Upload artifact
-
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site/_site # Wskaż folder `_site` w folderze `site`
-
+          path: ./site/_site
 
   deploy:
+    needs: build  # Dodaj zależność od joba build
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2  # Dodaj brakujący krok deploy
