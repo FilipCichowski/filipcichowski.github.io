@@ -1,4 +1,7 @@
-title: Vonge
+title: Filip Cichowski  | Hardware Engineer, Electronics Designer, and Maker
+description: Filip Cichowski is a hardware engineer, electronics designer, and maker. He specializes in creating innovative solutions for various industries, including IoT, data centers, and automotive.
+
+url: "https://filipcichowski.github.io"
 
 plugins:
   - jekyll-bookshop
@@ -55,3 +58,8 @@ defaults:
 tag_page_dir: tag
 tag_page_layout: tag_page
 tag_permalink_style: /:title
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all

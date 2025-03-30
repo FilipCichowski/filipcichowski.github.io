@@ -25,7 +25,5 @@ In order to provide high safety standard ready Meanwell AC/DC converter was used
 
 Ground on the PCB was separated for digital and analog part. 
 
-Lorem ipsum test
-
 ![Palm trees](/images/image-example-3.jpg)
 
