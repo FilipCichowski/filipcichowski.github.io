@@ -1,4 +1,4 @@
-name: Deploy Jekyll
+name: Deploy Jekyll Site
 
 on:
   push:
@@ -10,59 +10,55 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Verify structure
+        run: |
+          echo "Sprawdzam strukturę plików:"
+          ls -la
+          ls -la site
+          [ -f "site/Gemfile" ] || { echo "Brak Gemfile w folderze site!"; exit 1; }
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true
-
-      - name: Debug - List files
-        run: ls -la
+          working-directory: ./site
 
       - name: Install dependencies
-        run: |
-          bundle install
-          bundle list
+        run: bundle install
+        working-directory: ./site
 
-      - name: Build with Jekyll
-        run: |
-          bundle exec jekyll build --trace --verbose
-          echo "BUILD COMPLETED"
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --trace --verbose
+        working-directory: ./site
         env:
           JEKYLL_ENV: production
 
-      - name: Verify _site exists
+      - name: Verify build output
         run: |
-          ls -la _site
-          [ -d "_site" ] || exit 1
+          echo "Zawartość site/_site:"
+          ls -la site/_site
+          [ -d "site/_site" ] || { echo "Folder _site nie został wygenerowany!"; exit 1; }
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: ./_site
-          retention-days: 1  # Minimalny okres retencji
+          path: "site/_site"
 
   deploy:
     needs: build
-    permissions:
-      pages: write
-      id-token: write
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v2
