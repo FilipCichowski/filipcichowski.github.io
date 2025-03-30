@@ -27,27 +27,21 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Verify site directory
-        run: ls -la ./site  # Sprawdź czy folder ./site istnieje
-
       - name: Install dependencies
         run: bundle install
         working-directory: ./site
 
       - name: Build with Jekyll
-        run: bundle exec jekyll build --trace --verbose  # Dodaj flagi diagnostyczne
+        run: bundle exec jekyll build --trace
         working-directory: ./site
         env:
           JEKYLL_ENV: production
-
-      - name: Verify built files
-        run: ls -la ./site/_site  # Sprawdź czy _site został wygenerowany
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./site/_site
-          name: jekyll-site  # Dodaj jawną nazwę artefaktu
+
   deploy:
     needs: build
     environment:
@@ -58,5 +52,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          artifact: jekyll-site  # Nazwa musi zgadzać się z upload-pages-artifact
