@@ -1,67 +1,64 @@
-name: Deploy Jekyll Site
+
+name: Deploy Jekyll site to Pages
 
 on:
+
   push:
     branches: ["main"]
+
+
   workflow_dispatch:
+
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
+
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify structure
-        run: |
-          echo "Checking project structure..."
-          ls -la site/
-          [ -f "site/Gemfile" ] || { echo "ERROR: Missing site/Gemfile"; exit 1; }
-          [ -f "site/_config.yml" ] || { echo "ERROR: Missing site/_config.yml"; exit 1; }
-
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+
+        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
         with:
-          ruby-version: '3.3'
-          bundler-cache: true
-          working-directory: ./site
+          ruby-version: '3.1' # Możesz użyć pliku .ruby-version zamiast tego
+          bundler-cache: true # Automatycznie instaluje i cache'uje gemy
+          cache-version: 0 # Zwiększ tę wartość, jeśli potrzebujesz wymusić ponowne pobranie gemów
 
       - name: Install dependencies
         run: bundle install
-        working-directory: ./site
+        working-directory: ./site # Przejdź do folderu `site`
 
-      - name: Build Jekyll site
-        run: |
-          echo "Building with collections..."
-          bundle exec jekyll build --trace --verbose
-          echo "Build completed"
-        working-directory: ./site
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        working-directory: ./site # Przejdź do folderu `site`
         env:
           JEKYLL_ENV: production
 
-      - name: Verify build output
-        run: |
-          echo "Built files:"
-          ls -la site/_site
-          [ -d "site/_site" ] || { echo "ERROR: _site not generated"; exit 1; }
-
       - name: Upload artifact
+
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "site/_site"
+          path: ./site/_site # Wskaż folder `_site` w folderze `site`
+
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
