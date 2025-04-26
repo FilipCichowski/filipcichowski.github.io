@@ -2,7 +2,7 @@
 date: 2025-03-05 05:20:35 +0300
 title: EnergoEl Induction Heater Controller 
 subtitle: Robust, production ready, for professionals
-image: '/images/project-9.jpg'
+image: '/images/projects/energoel_induction_heater/main.jpeg'
 ---
 
 This induction heater controller is meant to automate repetative operations like hardening identical elements, thus providing consistency.
@@ -25,5 +25,14 @@ In order to provide high safety standard ready Meanwell AC/DC converter was used
 
 Ground on the PCB was separated for digital and analog part. 
 
-![Palm trees](/images/image-example-3.jpg)
+![Motherboard schematic](/images/projects/energoel_induction_heater/motherboard.png)
+
+![Display board schematic](/images/projects/energoel_induction_heater/motherboard.png)
+
+![Panel photo](/images/projects/energoel_induction_heater/panel.jpeg)
+
+
+
+
+
 
